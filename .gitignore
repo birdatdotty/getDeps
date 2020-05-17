@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Users files of project
+*.pro.user
