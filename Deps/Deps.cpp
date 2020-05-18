@@ -5,11 +5,13 @@
 #include <QDir>
 
 #define START_WITH "\tDLL Name: "
+//#define START_WITH "\tИмя DLL: "
 
 #include <QDebug>
 
 QStringList Deps::_deps(QString file)
 {
+    qInfo() << "QStringList Deps::_deps(QString file)" << file;
     qInfo() << "file:" << file;
     QStringList ret;
     QProcess proc;
@@ -28,11 +30,16 @@ QStringList Deps::_deps(QString file)
 
     lines += out.split("\n");
 
-    for (QString line: lines)
-        if (line.startsWith(START_WITH))
+    for (QString line: lines) {
+        if (line.startsWith(startDLLName))
         {
-            ret.append(line.mid(strlen(START_WITH)));
+            ret.append(line.mid(startDLLNameLen));
         }
+        if (line.endsWith("dll")) {
+            qInfo() << "line:" << line;
+            qInfo() << "line:" << line.mid(startDLLNameLen);
+        }
+    }
 
     return ret;
 }
@@ -40,6 +47,8 @@ QStringList Deps::_deps(QString file)
 Deps::Deps()
 {
     library = new QMap<QString,Dll*>;
+    startDLLName = "\tDLL Name: ";
+    startDLLNameLen = startDLLName.size();
 }
 
 QStringList Deps::deps(QString file)
