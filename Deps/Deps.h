@@ -30,10 +30,7 @@ public:
     QStringList locate(QString file, QString from = "/");
     Q_INVOKABLE QStringList searchNewLibrary(QStringList lines);
 
-    Q_INVOKABLE void setDLLName(QString newDLLName) {
-        startDLLName = newDLLName;
-        startDLLNameLen = newDLLName.size();
-    }
+    Q_INVOKABLE void setDLLName(QString newDLLName);
 
     Q_INVOKABLE void addSearchPath(QString newPath);
     Q_INVOKABLE void addSearchPath(QStringList newPath);

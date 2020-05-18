@@ -133,6 +133,11 @@ QStringList Deps::searchNewLibrary(QStringList libs) {
     return newLibrary;
 }
 
+void Deps::setDLLName(QString newDLLName) {
+    startDLLName = newDLLName;
+    startDLLNameLen = newDLLName.size();
+}
+
 void Deps::addSearchPath(QString newPath) {
     searchList.append(newPath);
 }
