@@ -1,0 +1,99 @@
+{
+    "": {
+        "deps": [],
+        "file": "",
+        "name": "",
+        "type": "ignore"
+    },
+    "KERNEL32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "KERNEL32.dll",
+        "type": "ignore"
+    },
+    "msvcrt.dll": {
+        "deps": [],
+        "file": "",
+        "name": "msvcrt.dll",
+        "type": "ignore"
+    },
+    "USER32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "USER32.dll",
+        "type": "ignore"
+    },
+    "ADVAPI32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "ADVAPI32.dll",
+        "type": "ignore"
+    },
+    "MPR.DLL": {
+        "deps": [],
+        "file": "",
+        "name": "MPR.DLL",
+        "type": "ignore"
+    },
+    "NETAPI32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "NETAPI32.dll",
+        "type": "ignore"
+    },
+    "ole32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "ole32.dll",
+        "type": "ignore"
+    },
+    "SHELL32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "SHELL32.dll",
+        "type": "ignore"
+    },
+    "USERENV.dll": {
+        "deps": [],
+        "file": "",
+        "name": "USERENV.dll",
+        "type": "ignore"
+    },
+    "VERSION.dll": {
+        "deps": [],
+        "file": "",
+        "name": "VERSION.dll",
+        "type": "ignore"
+    },
+    "WINMM.DLL": {
+        "deps": [],
+        "file": "",
+        "name": "WINMM.DLL",
+        "type": "ignore"
+    },
+    "WS2_32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "WS2_32.dll",
+        "type": "ignore"
+    },
+    "CRYPT32.dll": {
+        "deps": [],
+        "file": "",
+        "name": "CRYPT32.dll",
+        "type": "ignore"
+    },
+    "DNSAPI.dll": {
+        "deps": [],
+        "file": "",
+        "name": "DNSAPI.dll",
+        "type": "ignore"
+    },
+    "IPHLPAPI.dll": {
+        "deps": [],
+        "file": "",
+        "name": "IPHLPAPI.dll",
+        "type": "ignore"
+    }
+
+}

@@ -19,9 +19,11 @@ private:
     QStringList searchList;
     QStringList foundLibrary,
                 foundLibraryPath,
-                dontFindLibrary;
+                dontFindLibrary,
+                ignoreLibrary;
 
     QStringList _deps(QString file);
+    QStringList buildDll(QString libName);
 
 public:
     Q_INVOKABLE Deps();
@@ -41,22 +43,28 @@ public:
     QStringList getLibraryNames();
 
     Q_INVOKABLE void copyTo(QString destination);
+    Q_INVOKABLE void saveJSONLibrary(QString file);
+    Q_INVOKABLE void loadJSONLibrary(QString file);
 };
 
 class Dll {
-    QString name;
-    QString file;
-    QSet<QString> deps;
-
-public:
+  public:
+    enum Type {exist, ignore};
     Dll (QString name, QString path);
-    Dll (QString path);
+    Dll (QString path, Dll::Type t = exist);
 
-    QString getFile();
-    QString getName();
-    QStringList getDeps();
+    QString getFile() const;
+    QString getName() const;
+    QStringList getDeps() const;
+    Type getType() const;
     void addDep(QString newDeps);
     void addDep(QStringList newDeps);
+
+  private:
+    QString name;
+    QString file;
+    Type type;
+    QSet<QString> deps;
 };
 
 #endif // DEPS_H
