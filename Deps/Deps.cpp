@@ -38,10 +38,6 @@ QStringList Deps::_deps(QString file)
         {
             ret.append(line.mid(startDLLNameLen));
         }
-        if (line.endsWith("dll")) {
-            qInfo() << "line:" << line;
-            qInfo() << "line:" << line.mid(startDLLNameLen);
-        }
     }
 
     return ret;
@@ -55,6 +51,7 @@ QStringList Deps::buildDll(QString libName)
     QStringList ret;
 
     bool contains = library->keys().contains(libName);
+//    bool contains = false;
     QStringList deps;
 
     if (contains)
@@ -62,14 +59,14 @@ QStringList Deps::buildDll(QString libName)
     else
         deps = Deps::locate(libName, searchList);
 
-    for (QString line: deps) {
-        Dll* dll = new Dll(line);
-        QString dllName = dll->getName();
-        library->insert(dllName,dll);
-        foundLibrary.append(dllName);
+//    for (QString line: deps) {
+//        Dll* dll = new Dll(line);
+//        QString dllName = dll->getName();
+//        library->insert(dllName,dll);
+//        foundLibrary.append(dllName);
 
-        ret.append(_deps(dll->getFile()));
-    }
+//        ret.append(_deps(dll->getFile()));
+//    }
 
     return ret;
 }
@@ -116,13 +113,6 @@ QStringList Deps::locate(QString file, QStringList from)
 
     QStringList listRet = ret.toList();
 
-    if (ret.size() == 0)
-        dontFindLibrary.append(file);
-    else {
-        libraryNames.insert(file);
-        foundLibraryPath.append(listRet.at(0));
-    }
-
     return ret.toList();
 
 }
@@ -139,23 +129,40 @@ QStringList Deps::searchNewLibrary(QStringList libs) {
         if (searchList.size() == 0)
             searchList << "/";
 
-        qInfo() << "lib:" << lib;
-        qInfo() << "foundLibrary:" << foundLibrary;
-        qInfo() << "foundLibraryPath:" << foundLibraryPath;
-        qInfo() << "dontFindLibrary:" << dontFindLibrary;
-
         if (!foundLibrary.contains(lib))
             if (!foundLibraryPath.contains(lib))
                 if (!dontFindLibrary.contains(lib))
                   if (!ignoreLibrary.contains(lib)) {
                       bool contains = library->keys().contains(lib);
+//                      bool contains = false;
+                      QString file;
                       QStringList deps;
-                      if (contains) deps = library->value(lib)->getDeps();
-                      else deps = Deps::locate(lib, searchList);
-                      if (!foundLibrary.contains(lib))
-                          if (!foundLibraryPath.contains(lib))
-                              if (!dontFindLibrary.contains(lib))
-                                  newLibrary += buildDll(lib);
+                      if (contains) {
+                          const Dll* dll = library->value(lib);
+                          file = dll->getFile();
+                          deps = dll->getDeps();
+                      }
+                      else {
+                          QStringList filesList = locate(lib, searchList);;
+                          if (filesList.size()) {
+                              file = filesList.first();
+                              deps = _deps(file);
+                              Dll* dll = new Dll(file);
+                              dll->addDep(deps);
+                              library->insert(lib,dll);
+                          } else {
+                              dontFindLibrary.append(lib);
+                          }
+                      }
+
+                      if (file.size() > 0) {
+                          foundLibrary.append(lib);
+                          foundLibraryPath.append(file);
+                      }
+
+//                      return deps;
+                      newLibrary.append(deps);
+
                   }
     }
 
@@ -230,12 +237,9 @@ void Deps::saveJSONLibrary(QString file)
          else
              jsonDll["type"] = "exist";
 
-//        qInfo() << dllName + ":" << dll->getDeps();
-//        qInfo() << dllName << jsonDll;
-         qInfo() << __LINE__ << jsonDll;
          mainJson[dllName] = jsonDll;
      }
-     qInfo() << __LINE__ << mainJson;
+
      QJsonDocument doc (mainJson);
      doc.toJson();
 
@@ -263,9 +267,9 @@ void Deps::loadJSONLibrary(QString file)
          for (int i = 0; i < jsonDeps.size(); i++)
              deps.append(jsonDeps[i].toString());
 
-         qInfo() << name;
-         qInfo() << file;
-         qInfo() << deps;
+//         qInfo() << name;
+//         qInfo() << file;
+//         qInfo() << deps;
 
          if (type == "ignore") {
              ignoreLibrary.append(name);

@@ -28,15 +28,25 @@ int main(int argc, char **argv) {
     }
 
 
+    // deps:
     QJSValue jsMetaObject = myEngine.newQMetaObject(&Deps::staticMetaObject);
     myEngine.globalObject().setProperty("Deps", jsMetaObject);
 
+    // console:
     Console console;
     QJSValue valConsole = myEngine.newQObject(&console);
     myEngine.globalObject().setProperty("console", valConsole);
 
+    // file:
     myEngine.globalObject().setProperty("file", argv[2]);
 
+    // args:
+    QJSValue jsArgs = myEngine.newArray(argc);
+    for (int i = 0; i < argc; i++)
+        jsArgs.setProperty(i, argv[i]);
+    myEngine.globalObject().setProperty("args", jsArgs);
+
+    // content:
     QTextStream stream(&scriptFile);
     QString contents;
     QStringList tmp_contents = stream.readAll().split("\n");
