@@ -8,7 +8,7 @@ d.addSearchPath("/usr/i686-w64-mingw32/sys-root/mingw/bin/");
 d.loadJSONLibrary("/tmp/ignoryLib.json");
 
 // Загружаем список найденных библиотек
-//d.loadJSONLibrary("/tmp/22.json")
+d.loadJSONLibrary("/tmp/22.json")
 
 // objdump перечисляет библиотеки как "\tИмя DLL: any.dll"
 d.setDLLName("\tИмя DLL: ");
