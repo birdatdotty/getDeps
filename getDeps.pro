@@ -5,7 +5,5 @@ QT += core qml
 SOURCES += \
         main.cpp
 
-SOURCES += console.cpp
-HEADERS += console.h
-
 include (Deps/Deps.pri)
+include (Console/Console.pri)

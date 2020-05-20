@@ -8,7 +8,7 @@ d.addSearchPath("/usr/i686-w64-mingw32/sys-root/mingw/bin/");
 d.loadJSONLibrary("/tmp/ignoryLib.json");
 
 // Загружаем список найденных библиотек
-d.loadJSONLibrary("/tmp/22.json")
+//d.loadJSONLibrary("/tmp/22.json")
 
 // objdump перечисляет библиотеки как "\tИмя DLL: any.dll"
 d.setDLLName("\tИмя DLL: ");
@@ -17,13 +17,14 @@ d.setDLLName("\tИмя DLL: ");
 d.deps(file);
 
 // вывод для отладки (тут я просто смотрел некоторые значения через qInfo)
-//d.print();
+d.print();
 
 // сохраняем уже найденные библиотеки
 d.saveJSONLibrary("/tmp/22.json")
 
 // копируем найденные библиотеки в директорию
-d.copyTo("/tmp/123");
+d.copyTo("/tmp/12313");
 
 
 console.log("finish");
+console.log(args[2])
