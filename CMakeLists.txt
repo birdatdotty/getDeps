@@ -23,3 +23,7 @@ add_executable(getDeps
   main.cpp
 )
 target_link_libraries(getDeps Qt5::Core Qt5::Qml Console Deps)
+
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES example.js example-fedora.js  DESTINATION bin
+	PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
