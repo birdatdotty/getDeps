@@ -33,3 +33,6 @@
 
 # Users files of project
 *.pro.user
+
+# ignore build
+build
