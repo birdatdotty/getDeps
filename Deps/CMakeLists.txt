@@ -14,12 +14,9 @@ project(Deps LANGUAGES CXX)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
-add_library(Deps STATIC
+add_library(${PROJECT_NAME} STATIC
 	Deps.cpp
 	Dll.cc
 )
 
-target_link_libraries(Deps PRIVATE Qt5::Core)
-
-target_compile_definitions(Deps PRIVATE CMAKE_LIBRARY_TEST_LIBRARY)
-
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)

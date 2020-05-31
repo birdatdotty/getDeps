@@ -11,7 +11,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#find_package(Qt5Core qml)
 find_package(Qt5 COMPONENTS Core Qml REQUIRED)
 
 add_subdirectory(Console)
@@ -19,10 +18,10 @@ add_subdirectory(Deps)
 
 include_directories(Console Deps)
 
-add_executable(getDeps
+add_executable(${PROJECT_NAME}
   main.cpp
 )
-target_link_libraries(getDeps Qt5::Core Qt5::Qml Console Deps)
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Qml Console Deps)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES example.js example-fedora.js  DESTINATION bin

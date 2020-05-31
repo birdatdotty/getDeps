@@ -36,3 +36,6 @@
 
 # ignore build
 build
+
+# ignory qtcreator
+*.user

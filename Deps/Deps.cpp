@@ -201,7 +201,6 @@ QStringList Deps::getLibraryNames() {
 void Deps::copyTo(QString destination)
 {
     QDir dest(destination);
-    qInfo("");
     qInfo() << "copy to " + destination + ":";
 
     dest.mkpath(destination);

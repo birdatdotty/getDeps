@@ -17,9 +17,6 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    QCoreApplication a(argc, argv);
-    QJSEngine myEngine;
-
     QString fileName(argv[1]);
     QFile scriptFile(fileName.toUtf8());
     if (!scriptFile.open(QIODevice::ReadOnly)) {
@@ -27,6 +24,8 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    QCoreApplication a(argc, argv);
+    QJSEngine myEngine;
 
     // deps:
     QJSValue jsMetaObject = myEngine.newQMetaObject(&Deps::staticMetaObject);

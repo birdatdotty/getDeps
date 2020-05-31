@@ -10,24 +10,12 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-
-
-
-#find_package(Qt5Core)
-
-#project(Console)
-#add_library(test STATIC Console.cpp)
-
-
 project(Console LANGUAGES CXX)
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
-add_library(Console STATIC
+add_library(${PROJECT_NAME} STATIC
 	Console.cpp
 )
 
-target_link_libraries(Console PRIVATE Qt5::Core)
-
-target_compile_definitions(Console PRIVATE CMAKE_LIBRARY_TEST_LIBRARY)
-
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
